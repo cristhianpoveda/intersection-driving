@@ -1,17 +1,16 @@
-# Template: template-ros
+# Intersection driving for Duckiebots DB18.
 
-This template provides a boilerplate repository
-for developing ROS-based software in Duckietown.
-
-**NOTE:** If you want to develop software that does not use
-ROS, check out [this template](https://github.com/duckietown/template-basic).
+**NOTE:** Based on duckietown/template-ros.
 
 
-## How to use it
+## h
 
-### 1. Fork this repository
+### 1. Stop sign detector >> package: stop finder
 
-Use the fork button in the top-right corner of the github page to fork this template repository.
+The first step to cross an intersection is to detect where it is. In duckietown stop signs are solid red lines located in the ground at the point where a lane has reached an intersection.
+
+
+
 
 
 ### 2. Create a new repository
