@@ -57,7 +57,7 @@ class UsrsDetector(DTROS):
 
         imH, imW = image_np.shape[0:2]
 
-        imgrgb = cv2.cvtColor(image_np, cv2.BGR2RGB)
+        imgrgb = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
         imgrsz = cv2.resize(imgrgb, (self.modelW, self.modelH))
         model_input = np.expand_dims(imgrsz, axis=0)
 
