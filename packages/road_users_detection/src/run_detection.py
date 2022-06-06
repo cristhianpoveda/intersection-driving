@@ -65,9 +65,9 @@ class UsrsDetector(DTROS):
         self.interpreter.set_tensor(self.input_details[0]['index'], model_input)
         self.interpreter.invoke()
 
-        boxes = self.interpreter.get_tensor(self.output_details[1]['index'])[0]
-        classes = self.interpreter.get_tensor(self.output_details[3]['index'])[0]
-        scores = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
+        boxes = self.interpreter.get_tensor(self.output_details[1]['index'])
+        classes = self.interpreter.get_tensor(self.output_details[3]['index'])
+        scores = self.interpreter.get_tensor(self.output_details[0]['index'])
 
         #output_data = self.interpreter.get_tensor(self.output_details[0]['index'])
         #results = np.squeeze(output_data)
