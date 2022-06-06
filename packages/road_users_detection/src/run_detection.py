@@ -65,9 +65,9 @@ class UsrsDetector(DTROS):
         self.interpreter.set_tensor(self.input_details[0]['index'], model_input)
         self.interpreter.invoke()
 
-        boxes = self.interpreter.get_tensor(self.output_details[1]['index'])[0]
-        classes = self.interpreter.get_tensor(self.output_details[3]['index'])[0]
-        scores = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
+        boxes = self.interpreter.get_tensor(self.output_details[1])[0]
+        classes = self.interpreter.get_tensor(self.output_details[3])[0]
+        scores = self.interpreter.get_tensor(self.output_details[0])[0]
 
         for i in range(len(scores)):
             if ((scores[i] > 0.2) and (scores[i] <= 1.0)):
