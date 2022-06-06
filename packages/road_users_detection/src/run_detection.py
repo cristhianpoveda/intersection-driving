@@ -23,9 +23,9 @@ class UsrsDetector(DTROS):
         package = rospkg.RosPack()
 
         MODEL_PATH = package.get_path('road_users_detection') + '/TFLite_model/best-int8.tflite'
-        LABELS_PATH = package.get_path('road_users_detection') + '/TFLite_model/labelmap.txt'
+        self.LABELS_PATH = package.get_path('road_users_detection') + '/TFLite_model/labelmap.txt'
 
-        with open(LABELS_PATH, 'r') as f:
+        with open(self.LABELS_PATH, 'r') as f:
             self.labels = [line.strip() for line in f.readlines()]
 
         # initialize tensorflow interpreter
@@ -42,10 +42,10 @@ class UsrsDetector(DTROS):
         self.modelW = self.input_details[0]['shape'][2]
 
         # publisher (edited image)
-        self.center_pub = rospy.Publisher('~detected_usrs/compressed', CompressedImage, queue_size=1)
+        self.detect_pub = rospy.Publisher('~detected_usrs/compressed', CompressedImage, queue_size=1)
 
         # publisher (edited image)
-        self.dist_pub = rospy.Publisher('~usrs_location', String, queue_size=1)
+        self.location_pub = rospy.Publisher('~usrs_location', String, queue_size=1)
 
         # subscriber to camera_node/image/compressed
         self.sub = rospy.Subscriber('/duckiebot4/camera_node/image/compressed', CompressedImage, self.detection, queue_size=1)
@@ -68,6 +68,15 @@ class UsrsDetector(DTROS):
         boxes = self.interpreter.get_tensor(self.output_details[1])[0]
         classes = self.interpreter.get_tensor(self.output_details[3])[0]
         scores = self.interpreter.get_tensor(self.output_details[0])[0]
+
+        #output_data = self.interpreter.get_tensor(self.output_details[0]['index'])
+        #results = np.squeeze(output_data)
+
+        #top_k = results.argsort()[-5:][::-1]
+        #label1 = load_labels(self.LABELS_PATH)
+        #for i in top_k:
+        #    self.
+        #    print('{:08.6f}: {}'.format(float(results[i] / 255.0), label1[i]))
 
         for i in range(len(scores)):
             if ((scores[i] > 0.2) and (scores[i] <= 1.0)):
@@ -94,6 +103,9 @@ class UsrsDetector(DTROS):
         msg.header.stamp = rospy.Time.now()
         msg.format = "jpeg"
         msg.data = np.array(cv2.imencode('.jpg', detectedimg)[1]).tostring()
+
+        # Publish new image
+        self.detect_pub.publish(msg)
 
 if __name__ == '__main__':
     # create the node
