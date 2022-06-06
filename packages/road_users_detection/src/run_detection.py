@@ -35,7 +35,7 @@ class UsrsDetector(DTROS):
 
         # save input and output details
         self.input_details = self.interpreter.get_input_details()
-        self.output_details = self.get_output_details()
+        self.output_details = self.interpreter.get_output_details()
 
         # get expected model's input size
         self.modelH = self.input_details[0]['shape'][1]

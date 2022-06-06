@@ -1,2 +1,2 @@
 # LIST YOUR PYTHON3 PACKAGES HERE
-#tflite-runtime -> pi 3 version!
+tflite-runtime
