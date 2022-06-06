@@ -48,7 +48,7 @@ class UsrsDetector(DTROS):
         self.dist_pub = rospy.Publisher('~usrs_location', String, queue_size=1)
 
         # subscriber to camera_node/image/compressed
-        self.sub = rospy.Subscriber('/duckiebot4/camera_node/image/compressed', CompressedImage, self.camera, queue_size=1)
+        self.sub = rospy.Subscriber('/duckiebot4/camera_node/image/compressed', CompressedImage, self.detection, queue_size=1)
 
     def detection(self, image):
 
