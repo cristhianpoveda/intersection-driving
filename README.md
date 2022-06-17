@@ -23,7 +23,7 @@ This package is in charge of detecting the stop sign located at the robot's curr
 
 The processed image is obtained by subscribing to the duckiebot's camera driver topic. Results are published into 2 separate topics containing an image with the line detection and the estimated distance respectively.
 
-
+![]()
 
 This test was performed in real time running on a duckiebot at 20fps with an image resolution of (416, 416)px.
 
