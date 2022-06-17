@@ -43,6 +43,10 @@ A key factor to interact with the envirnoment is to detect who else is using the
 
 This is done by implementing the Edge Impulse FOMO model for object detection (input image resolution 320 x 320 px) as a c++ library running directly on the duckiebot without the need of any external dependency. Model's input is a 1d array containing the flattened image pixels in format (0xRRGGBB); this array is created in the python script image_processor.py by subscribing to the camera node and processed using opencv tools.
 
+#### Model metrics
+
+![Alt text](/repoImages/Models.jpg?raw=true "Optional Title")
+
 **Note:** Models were tested on the duckiebot's raspberry pi 3 (1GB RAM) by running the following c++ codes containing: inference script and model library.
 
 ![Alt text](/repoImages/InferenceT.jpg?raw=true "Optional Title")
