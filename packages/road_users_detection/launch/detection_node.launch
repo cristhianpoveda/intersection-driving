@@ -1,9 +1,0 @@
-<launch>
-
-  <group ns="$(arg veh)">  
-
-    <node pkg="road_users_detection" type="run_detection.py" name="run_detection" output="screen"/>
-
-  </group>
-
-</launch>
