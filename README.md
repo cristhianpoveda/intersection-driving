@@ -17,7 +17,7 @@
 
 The first step to cross an intersection is to detect where it is. In duckietown stop signs are solid red lines located in the ground at the point where a lane has reached an intersection.
 
-![logo](https://github.com/cristhianpoveda/intersection-driving/repoImages/intersection.jpg)
+![logo](https://github.com/cristhianpoveda/intersection-driving/repoImages/Intersection.jpg)
 
 This package is in charge of detecting the stop sign located at the robot's current lane and estimating the horizontal distance to it. For this purpose, it uses open cv tools to process the image, and the distance is calculated with a function obtained experimentally. To take into account, received images are cropped because ground is considered to be planar, so that just the lane in front of the robot is analysed in order to minimize detection mistakes.
 
