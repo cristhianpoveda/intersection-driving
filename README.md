@@ -27,7 +27,14 @@ test gif.
 
 This test was performed in real time running on a duckiebot at 20fps with an image resolution of (416, 416)px.
 
-### 4. Place your code
+### 2. Road users detection >> package: detection
 
-Place your code in the directory `/packages/` of
-your new repository
+A key factor to interact with the envirnoment is to detect who else is using the road space in order to avoid collisions, and this task must be done in  real time. Therefore, model precision and RAM ussage in the robot are taken into account.
+
+This is done by implementing the Edge Impulse FOMO model for object detection (input image resolution 320 x 320 px) as a c++ library running directly on the duckiebot without the need of any external dependency. Model's input is a 1d array containing the flattened image pixels in format (0xRRGGBB); this array is created in the python script image_processor.py by subscribing to the camera node and processed using opencv tools.
+
+Inference time
+
+Inference time by the duckiebot using a previous loaded image.
+
+**Note:** Inference tested on the duckiebot's raspberry pi 3 (1GB RAM) by running the following c++ codes containing: inference script and model library. It is also included the previous models which were trained and tested. 
