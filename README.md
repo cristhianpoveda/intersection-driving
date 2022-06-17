@@ -23,7 +23,7 @@ This package is in charge of detecting the stop sign located at the robot's curr
 
 The processed image is obtained by subscribing to the duckiebot's camera driver topic. Results are published into 2 separate topics containing an image with the line detection and the estimated distance respectively.
 
-
+![Alt text](/repoImages/stopFinder.gif?raw=true "Optional Title")
 
 This test was performed in real time running on a duckiebot at 20fps with an image resolution of (416, 416)px.
 
@@ -33,7 +33,7 @@ A key factor to interact with the envirnoment is to detect who else is using the
 
 This is done by implementing the Edge Impulse FOMO model for object detection (input image resolution 320 x 320 px) as a c++ library running directly on the duckiebot without the need of any external dependency. Model's input is a 1d array containing the flattened image pixels in format (0xRRGGBB); this array is created in the python script image_processor.py by subscribing to the camera node and processed using opencv tools.
 
-
+![Alt text](/repoImages/InferenceT.jpg?raw=true "Optional Title")
 
 Inference time by the duckiebot using a previous loaded image.
 
