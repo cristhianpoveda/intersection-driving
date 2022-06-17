@@ -17,10 +17,10 @@ class ImgProcessor(DTROS):
         super(ImgProcessor, self).__init__(node_name=node_name, node_type=NodeType.PERCEPTION)
 
         # publisher (model raw features)
-        self.flat_buffer = rospy.Publisher('/input_buffer_array', Float32MultiArray, queue_size=1)
+        self.flat_buffer = rospy.Publisher('~input_buffer_array', Float32MultiArray, queue_size=1)
 
-        # subscriber to camera_node/image/compressed
-        self.sub = rospy.Subscriber('/duckiebot4/camera_node/image/compressed', CompressedImage, self.camera, queue_size=1)
+        # subscriber to camera_node/image/compressed (remap!!)
+        self.sub = rospy.Subscriber('/image/compressed', CompressedImage, self.camera, queue_size=1)
 
     def camera(self, image):
         # import rgb image and resize to desired resolution (160x160)px
