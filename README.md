@@ -26,11 +26,23 @@ For ensuring real time execution during the object detection functionality the f
 
 `rosparam set /ROBOTNAME.local/camera_node/res_w resW` resW = desired camera image width.
 
+### Running the application
+
+
+`pip install duckietown-shell` install duckietown shell.
+
+#### Inside the project directory.
+
+`dts devel build -f -H ROBOTNAME.local` build docker image on the robot.
+
+`dts devel run -H ROBOTNAME.local` run the appplication on the robot.
+
+
 ### 1. Stop sign detector >> package: stop finder
 
 The first step to cross an intersection is to detect where it is. In duckietown stop signs are solid red lines located in the ground at the point where a lane has reached an intersection.
 
-This package is in charge of detecting the stop sign located at the robot's current lane and estimating the horizontal distance to it. For this purpose, it uses open cv tools to process the image, and the distance is calculated with a function obtained experimentally. To take into account, received images are cropped because ground is considered to be planar, so that just the lane in front of the robot is analysed in order to minimize detection mistakes.
+This package is in charge of detecting the stop sign located at the robot's current lane and estimating the horizontal distance to it. For this purpose, it uses open cv tools to process the image, and the distance is calculated with a function obtained experimentally through polynomial regession. To take into account, received images are cropped because ground is considered to be planar, so that just the lane in front of the robot is analysed in order to minimize detection mistakes.
 
 The processed image is obtained by subscribing to the duckiebot's camera driver topic. Results are published into 2 separate topics containing an image with the line detection and the estimated distance respectively.
 
@@ -40,7 +52,7 @@ This test was performed in real time running on a duckiebot at 20fps with an ima
 
 ### 2. Road users detection >> package: detection
 
-A key factor to interact with the envirnoment is to detect who else is using the road space in order to avoid collisions, and this task must be done in  real time. Therefore, model precision and RAM ussage in the robot are taken into account. Afeter testing conventional object detection models based on bounding boxes were changed to centroid based detection.
+A key factor to interact with the envirnoment is to detect who else is using the road space in order to avoid collisions, and this task must be done in  real time. Therefore, model precision and RAM ussage in the robot are taken into account. After testing using tf-lite, conventional object detection models based on bounding boxes were changed to centroid based detection.
 
 This is done by implementing the Edge Impulse FOMO model for object detection (input image resolution 320 x 320 px) as a c++ library running directly on the duckiebot without the need of any external dependency. Model's input is a 1d array containing the flattened image pixels in format (0xRRGGBB); this array is created in the python script image_processor.py by subscribing to the camera node and processed using opencv tools.
 
@@ -62,5 +74,7 @@ Inference time by the duckiebot using a previous loaded image. First with quanti
 [Quantized (int 8) model repo](https://github.com/cristhianpoveda/prueba_quant)
 
 #### Object detection models tested on duckiebot processor
+
+Yolov5 models tested using tf-lite-runtime, and FOMO model using edge-impulse-sdk
 
 ![Alt text](/repoImages/table.jpg?raw=true "Optional Title")
