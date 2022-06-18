@@ -11,6 +11,7 @@
 * Pedestrians only cross the street between adjacent blocks.
 * Priority norms accoring to Colombia's National Transit Code.
 * Negotiation refers to avoid collisions inside conflict zones without muli-agent communication.
+* Duckiebot DB18 (1G RAM)
 
 ![Alt text](/repoImages/Intersection.jpg?raw=true "Optional Title")
 
@@ -39,11 +40,13 @@ This test was performed in real time running on a duckiebot at 20fps with an ima
 
 ### 2. Road users detection >> package: detection
 
-A key factor to interact with the envirnoment is to detect who else is using the road space in order to avoid collisions, and this task must be done in  real time. Therefore, model precision and RAM ussage in the robot are taken into account.
+A key factor to interact with the envirnoment is to detect who else is using the road space in order to avoid collisions, and this task must be done in  real time. Therefore, model precision and RAM ussage in the robot are taken into account. Afeter testing conventional object detection models based on bounding boxes were changed to centroid based detection.
 
 This is done by implementing the Edge Impulse FOMO model for object detection (input image resolution 320 x 320 px) as a c++ library running directly on the duckiebot without the need of any external dependency. Model's input is a 1d array containing the flattened image pixels in format (0xRRGGBB); this array is created in the python script image_processor.py by subscribing to the camera node and processed using opencv tools.
 
 #### Model metrics
+
+Copied from edge impulse studio.
 
 ![Alt text](/repoImages/Models.jpg?raw=true "Optional Title")
 
@@ -52,10 +55,12 @@ This is done by implementing the Edge Impulse FOMO model for object detection (i
 ![Alt text](/repoImages/InferenceT.jpg?raw=true "Optional Title")
 Inference time by the duckiebot using a previous loaded image. First with quantized (int 8) model and then with float32 model.
 
-**FOMO model c++ library repos**
+**FOMO model c++ library repos (downloaded from Edge Impulse Deployment page)**
 
 [float 32 model repo](https://github.com/cristhianpoveda/prueba_c)
 
 [Quantized (int 8) model repo](https://github.com/cristhianpoveda/prueba_quant)
 
-#### Object detection models tested
+#### Object detection models tested on duckiebot processor
+
+![Alt text](/repoImages/table.jpg?raw=true "Optional Title")
